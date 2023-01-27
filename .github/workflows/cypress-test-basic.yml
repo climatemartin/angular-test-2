@@ -1,0 +1,31 @@
+name: cypress-test-basic
+on:
+  workflow_dispatch:
+
+jobs:
+
+  start:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node: [16, 18]
+    name: Angular E2E test on Node.js ${{ matrix.node }}
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Start server
+        run: npm start &
+
+      - name: Sleep for 60 seconds
+        run: sleep 60s
+        shell: bash
+
+      - name: Test the website
+        run: npx cypress run -c baseUrl=http://localhost:4200 --e2e --headless --browser chrome
