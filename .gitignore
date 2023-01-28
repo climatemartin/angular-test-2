@@ -8,6 +8,7 @@
 
 # Node
 /node_modules
+node_modules/
 npm-debug.log
 yarn-error.log
 
@@ -44,3 +45,7 @@ Thumbs.db
 cypress/downloads
 cypress/screenshots
 cypress/videos
+
+examples/**/cypress/videos
+examples/**/cypress/screenshots
+examples/**/cypress/downloads

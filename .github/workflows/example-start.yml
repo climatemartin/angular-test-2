@@ -1,0 +1,31 @@
+name: example-start
+on:
+  workflow_dispatch:
+
+env:
+  # Disable update-check called by serve through start or start2 script
+  # works around issue when more than one instance of serve is started
+  # See PR https://github.com/vercel/serve/pull/457
+  NO_UPDATE_CHECK: 1
+
+jobs:
+
+  start:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node: [16, 18]
+    name: E2E test on Node.js ${{ matrix.node }}
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          working-directory: examples/start
+          start: npm start
+          wait-on: 'http://localhost:3000'
