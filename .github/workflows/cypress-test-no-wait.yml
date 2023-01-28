@@ -1,0 +1,25 @@
+name: cypress-test-no-wait
+on:
+  workflow_dispatch:
+
+jobs:
+
+  start:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node: [16, 18]
+    name: Angular E2E test on Node.js ${{ matrix.node }}
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm start
+#          wait-on: 'http://localhost:4200'
+          browser: chrome
