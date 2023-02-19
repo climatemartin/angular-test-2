@@ -1,0 +1,45 @@
+name: cypress-test-ip6
+on:
+  workflow_dispatch:
+
+jobs:
+
+  start-ipv4-num:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node: [16, 18]
+    name: Angular E2E test on Node.js ${{ matrix.node }}
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm start
+          wait-on: 'http://127.0.0.1:4200'
+          browser: chrome
+
+  start-ipv6-num:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node: [16, 18]
+    name: Angular E2E test on Node.js ${{ matrix.node }}
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm start
+          wait-on: 'http://ip6-localhost:4200'
+          browser: chrome
