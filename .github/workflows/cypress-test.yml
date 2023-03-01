@@ -4,12 +4,13 @@ on:
 
 jobs:
 
-  start:
+  node:
     runs-on: ubuntu-22.04
     strategy:
+      fail-fast: false
       matrix:
         node: [16, 18]
-    name: Angular E2E test on Node.js ${{ matrix.node }}
+    name: Test on Node.js ${{ matrix.node }}
     steps:
       - uses: actions/setup-node@v3
         with:
@@ -22,4 +23,64 @@ jobs:
         with:
           start: npm start
           wait-on: 'http://localhost:4200'
-          browser: chrome
+
+  os:
+    strategy:
+      fail-fast: false
+      matrix:
+        OS: [ubuntu-22.04, windows-2022, macos-12]
+    runs-on: ${{ matrix.OS }}
+    name: Test Node default on ${{ matrix.OS }}
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm start
+          wait-on: 'http://localhost:4200'
+
+  workaround-1:
+    strategy:
+      fail-fast: false
+      matrix:
+        OS: [ubuntu-22.04, windows-2022, macos-12]
+    runs-on: ${{ matrix.OS }}
+    name: Test [::1] on ${{ matrix.OS }}
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm start
+          wait-on: 'http://[::1]:4200'
+
+  workaround-2:
+    strategy:
+      fail-fast: false
+      matrix:
+        OS: [ubuntu-22.04, windows-2022, macos-12]
+    runs-on: ${{ matrix.OS }}
+    name: Test ip6-localhost on ${{ matrix.OS }}
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm start
+          wait-on: 'http://ip6-localhost:4200'
+          config: baseUrl=http://ip6-localhost:4200
