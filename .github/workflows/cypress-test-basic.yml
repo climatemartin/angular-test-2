@@ -23,9 +23,9 @@ jobs:
       - name: Start server
         run: npm start &
 
-      - name: Sleep for 60 seconds
-        run: sleep 60s
-        shell: bash
+      # - name: Sleep for 60 seconds
+      #   run: sleep 60s
+      #   shell: bash
 
       - name: Test the website
-        run: npx cypress run -c baseUrl=http://localhost:4200 --e2e --headless --browser chrome
+        run: npx cypress run
