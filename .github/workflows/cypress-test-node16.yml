@@ -24,7 +24,7 @@ jobs:
           wait-on: 'http://localhost:4200'
           browser: chrome
 
-  no-server-start:
+  start-ng-direct:
     runs-on: ubuntu-22.04
     if: always()
     steps:
@@ -37,26 +37,43 @@ jobs:
     - name: Cypress tests
       uses: cypress-io/github-action@v5
       with:
-#       start: npm start
+        start: npx ng serve --disable-host-check
         wait-on: 'http://localhost:4200'
         browser: chrome
 
-  no-server-start-debug:
-    runs-on: ubuntu-22.04
-    if: always()
-    steps:
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 16
-    - name: Checkout
-      uses: actions/checkout@v3
+#   no-server-start:
+#     runs-on: ubuntu-22.04
+#     if: always()
+#     steps:
+#     - uses: actions/setup-node@v3
+#       with:
+#         node-version: 16
+#     - name: Checkout
+#       uses: actions/checkout@v3
 
-    - name: Cypress tests
-      uses: cypress-io/github-action@v5
-      with:
-#       start: npm start
-        wait-on: 'http://localhost:4200'
-#        wait-on-timeout: 120000
-        browser: chrome
-      env:
-        DEBUG: '@cypress/github-action'
+#     - name: Cypress tests
+#       uses: cypress-io/github-action@v5
+#       with:
+# #       start: npm start
+#         wait-on: 'http://localhost:4200'
+#         browser: chrome
+
+#   no-server-start-debug:
+#     runs-on: ubuntu-22.04
+#     if: always()
+#     steps:
+#     - uses: actions/setup-node@v3
+#       with:
+#         node-version: 16
+#     - name: Checkout
+#       uses: actions/checkout@v3
+
+#     - name: Cypress tests
+#       uses: cypress-io/github-action@v5
+#       with:
+# #       start: npm start
+#         wait-on: 'http://localhost:4200'
+# #        wait-on-timeout: 120000
+#         browser: chrome
+#       env:
+#         DEBUG: '@cypress/github-action'
