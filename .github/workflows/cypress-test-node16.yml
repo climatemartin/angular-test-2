@@ -41,6 +41,24 @@ jobs:
         wait-on: 'http://localhost:4200'
         browser: chrome
 
+  start-1006:
+    runs-on: ubuntu-22.04
+    if: always()
+    steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Cypress tests
+      uses: cypress-io/github-action@v5
+      with:
+        start: npm run start-issue-1006
+        wait-on: 'http://localhost:4200'
+        browser: chrome
+
+
 #   no-server-start:
 #     runs-on: ubuntu-22.04
 #     if: always()
