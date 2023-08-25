@@ -23,3 +23,22 @@ jobs:
           start: npm start
           wait-on: 'http://localhost:4200'
           browser: chrome
+
+  no-server-start:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Cypress tests
+      uses: cypress-io/github-action@v5
+      with:
+#       start: npm start
+        wait-on: 'http://localhost:4200'
+        wait-on-timeout: 120000
+        browser: chrome
+      env:
+        DEBUG: '@cypress/github-action'
