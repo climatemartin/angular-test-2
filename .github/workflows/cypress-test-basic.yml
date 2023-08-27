@@ -27,5 +27,8 @@ jobs:
       #   run: sleep 60s
       #   shell: bash
 
+      - name: Check website availability
+        run: curl -I http://localhost:4200
+
       - name: Test the website
         run: npx cypress run
