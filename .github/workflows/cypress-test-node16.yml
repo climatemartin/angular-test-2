@@ -55,7 +55,7 @@ jobs:
       uses: cypress-io/github-action@v5
       with:
         start: npm run start-issue-1006
-        wait-on: 'http://localhost:4200'
+        wait-on: 'http://localhost:4200/en'
         browser: chrome
 
 
