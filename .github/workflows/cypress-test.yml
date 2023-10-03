@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Cypress tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         with:
           start: npm start
           wait-on: 'http://localhost:4200'
@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Cypress tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         with:
           start: npm start
           wait-on: 'http://localhost:4200'
@@ -59,7 +59,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Cypress tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         with:
           start: npm start
           wait-on: 'http://[::1]:4200'
@@ -79,7 +79,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Cypress tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         with:
           start: npm start
           wait-on: 'http://ip6-localhost:4200'

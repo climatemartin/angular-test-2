@@ -24,6 +24,6 @@ jobs:
         run: npx start-server-and-test start http://localhost:4200 "npm run-script defer-test" &
 
       - name: Cypress tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         with:
           browser: chrome
