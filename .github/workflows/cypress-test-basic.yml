@@ -7,6 +7,7 @@ jobs:
   start:
     runs-on: ubuntu-22.04
     strategy:
+      fail-fast: false
       matrix:
         node: [16, 18, 20]
     name: Angular E2E test on Node.js ${{ matrix.node }}
