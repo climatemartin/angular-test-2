@@ -1,0 +1,19 @@
+name: cypress-test-node-default
+on:
+  workflow_dispatch:
+
+jobs:
+
+  start:
+    runs-on: ubuntu-22.04
+    name: Angular E2E test on default Node.js version
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm start
+          wait-on: 'http://localhost:4200'
+          browser: chrome
