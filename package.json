@@ -1,7 +1,6 @@
 {
   "name": "angular-test",
   "version": "0.0.0",
-  "platform": "node",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
